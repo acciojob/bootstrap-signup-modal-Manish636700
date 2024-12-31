@@ -24,3 +24,6 @@ form{
 	font-size:15px;
 	border-radius:10%;
 }
+.close{
+	text-align:end;
+}
