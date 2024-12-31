@@ -1,12 +1,15 @@
-it('should show the signup modal when the signup button is clicked', () => {
-    // Visit the page that contains the modal
-    cy.visit('/your-page-url');
+describe('Signup Modal Test', () => {
+    it('should show the signup modal and close it', () => {
+        // Click on the sign-up button
+        cy.get('button[data-bs-toggle="modal"]').click();
+        
+        // Ensure modal is visible after clicking
+        cy.get('#signupModal').should('be.visible');
 
-    // Click the Sign Up button to trigger the modal
-    cy.get('button[data-bs-toggle="modal"]').click();
+        // Close the modal
+        cy.get('.btn-close').click();
 
-    // Wait for the modal to be visible
-    cy.get('#signupModal')
-        .should('be.visible') // Ensure the modal is visible
-        .and('have.class', 'show'); // Ensure the 'show' class is present
+        // Ensure modal is hidden
+        cy.get('#signupModal').should('not.be.visible');
+    });
 });
