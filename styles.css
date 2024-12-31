@@ -1,1 +1,26 @@
 /*  your css code here. If applicable */
+form{
+	width:600px;
+	height:400px;
+	border: 1px solid black;
+}
+.box{
+	border-top: 1px solid black;
+	margin-top:40px;
+}
+.email{
+	padding:10px 10px 0px 10px;
+}
+.button{
+	border-top:1px solid black;
+	text-align:end;
+	margin-top:30px;
+}
+.abc{
+	background-color:green;
+	color:white;
+	margin-top: 50px;
+	margin-right:10px;
+	font-size:15px;
+	border-radius:10%;
+}
