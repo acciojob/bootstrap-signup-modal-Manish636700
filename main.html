@@ -1,81 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup Modal with Cypress Test</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/cypress@9.1.0/dist/cypress.min.js"></script>
+  <title>Signup Modal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-  <div class="container">
-    <h1>Signup Modal Test</h1>
-    <!-- Button to trigger Modal -->
-    <button id="showModalButton" class="btn btn-primary">Sign Up</button>
+  <!-- Button to trigger Modal -->
+  <button id="showModalButton" class="btn btn-primary">Sign Up</button>
 
-    <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
-            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
-                <small class="form-text text-muted">Your information is safe with us.</small>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
-              </div>
-              <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-          </div>
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
+          <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Signup Form -->
+          <form>
+            <!-- Email Address -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email">
+              <small class="form-text text-muted">Your information is safe with us.</small>
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <!-- Confirm Password -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
         </div>
       </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const showModalButton = document.getElementById('showModalButton');
-        const myModalElement = document.getElementById('signupModal');
-        const myModal = new bootstrap.Modal(myModalElement);
-
-        showModalButton.addEventListener('click', function () {
-          myModal.show();
-        });
-      });
-    </script>
   </div>
 
-  <!-- Cypress Test Code -->
+  <!-- JavaScript for Bootstrap and Modal functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    window.addEventListener('load', function() {
-      // Simulating Cypress tests inside the browser for demonstration purposes
-      try {
-        cy.visit(window.location.href); // Simulate visiting the current page
+    // Wait for the DOM content to load before adding the event listener
+    document.addEventListener('DOMContentLoaded', function () {
+      const showModalButton = document.getElementById('showModalButton');
+      const myModalElement = document.getElementById('signupModal');
+      const myModal = new bootstrap.Modal(myModalElement);
 
-        cy.get('#showModalButton').click(); // Click the "Sign Up" button to open the modal
-        cy.get('#signupModal').should('have.class', 'show'); // Verify that the modal is visible
+      // Add an event listener to the button to show the modal
+      showModalButton.addEventListener('click', function () {
+        myModal.show();  // This triggers the modal to show
+      });
+    });
+  </script>
 
-        cy.get('.btn-close').click(); // Close the modal
-        cy.get('#signupModal').should('not.have.class', 'show'); // Verify the modal is hidden
-      } catch (e) {
-        console.error("Cypress is not available in this environment", e);
-      }
+  <!-- Cypress Test Script -->
+  <script>
+    describe('Modal Test', () => {
+      it('should show and hide the modal correctly', () => {
+        // Visit the page (if it's not already done in a beforeEach hook)
+        cy.visit('http://localhost:3000'); // Replace with the correct URL if needed
+
+        // Ensure the modal is initially hidden
+        cy.get('#signupModal').should('not.have.class', 'show');
+
+        // Click the "Sign Up" button to open the modal
+        cy.get('#showModalButton').click();
+
+        // Wait for the modal to be shown and check that it is visible
+        cy.get('#signupModal').should('have.class', 'show');
+
+        // Optionally, you can add a delay to account for animation timing
+        cy.wait(500); // Wait for modal to fully transition
+
+        // Close the modal by clicking the close button
+        cy.get('.btn-close').click();
+
+        // Ensure that the modal is hidden after closing it
+        cy.get('#signupModal').should('not.have.class', 'show');
+      });
     });
   </script>
 </body>
