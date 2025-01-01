@@ -1,5 +1,5 @@
-const myModel = bootstrap.Modal('#signupModal');
+const myModel = new bootstrap.Modal(document.getElementById('signupModal'));
 
-window.addEventListener('DOMContentLoaded',()=>{
-	myModel.show();
+window.addEventListener('DOMContentLoaded', () => {
+    myModel.show();
 });
