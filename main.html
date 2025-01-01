@@ -62,6 +62,11 @@
       showModalButton.addEventListener('click', function () {
         myModal.show();  // This triggers the modal to show
       });
+
+      // Optionally, add event listener for when modal is hidden
+      myModalElement.addEventListener('hidden.bs.modal', function () {
+        console.log('Modal is hidden');
+      });
     });
   </script>
 </body>
