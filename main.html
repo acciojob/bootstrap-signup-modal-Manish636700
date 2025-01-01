@@ -1,167 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Modal</title>
-    <style>
-        /* Basic styling for the page */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-container {
-            background-color: white;
-            width: 300px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .modal-body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-body label {
-            margin-bottom: 5px;
-        }
-
-        .modal-body input {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-        }
-
-        .modal-footer {
-            text-align: right;
-        }
-
-        .modal-footer button {
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .modal-footer .close-btn {
-            background-color: #dc3545;
-        }
-
-        .modal-footer button:hover {
-            opacity: 0.8;
-        }
-
-        .open-btn {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .open-btn:hover {
-            opacity: 0.8;
-        }
-
-        .info-text {
-            font-size: 0.9em;
-            color: #6c757d;
-        }
-    </style>
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <!-- Sign Up Button -->
-    <button class="open-btn" onclick="openModal()">Sign Up</button>
+    <button type="button" id="signUpBtn">Sign Up</button>
 
-    <!-- Modal Overlay -->
-    <div class="modal-overlay" id="signupModal">
-        <div class="modal-container">
-            <div class="modal-header">
-                Create Account
-            </div>
-            <div class="modal-body">
-                <!-- Email Field -->
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <h2>Create Account</h2>
+            <form id="signupForm">
                 <label for="email">Email address</label>
                 <input type="email" id="email" placeholder="Enter email" required>
-                <small class="info-text">Your information is safe with us.</small>
-
-                <!-- Password Field -->
+                <small>Your information is safe with us.</small>
+                
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Password" required>
-
-                <!-- Confirm Password Field -->
+                
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-            </div>
-            <div class="modal-footer">
-                <button class="close-btn" onclick="closeModal()">Close</button>
-                <button onclick="submitForm()">Submit</button>
-            </div>
+                
+                <button type="submit" id="submitBtn">Submit</button>
+            </form>
         </div>
     </div>
 
-    <script>
-        // Function to open the modal
-        function openModal() {
-            document.getElementById('signupModal').style.display = 'flex';
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            document.getElementById('signupModal').style.display = 'none';
-        }
-
-        // Function to handle form submission (basic example)
-        function submitForm() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            // Simulate form submission (can be sent to the server)
-            alert('Account Created for ' + email);
-
-            // Close the modal
-            closeModal();
-        }
-    </script>
+    <!-- Link to custom JS -->
+    <script type="text/javascript" src="script.js"></script>
 
 </body>
+
 </html>
