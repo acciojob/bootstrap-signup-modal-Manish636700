@@ -1,4 +1,4 @@
-const myModel = bootstrap.Modal.getOrCreateInstance('#signupModal');
+const myModel = bootstrap.Modal('#signupModal');
 
 window.addEventListener('DOMContentLoaded',()=>{
 	myModel.show();
