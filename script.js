@@ -1,48 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Modal elements
-    const modal = document.getElementById('signupModal');
-    const signUpBtn = document.getElementById('signUpBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    const submitBtn = document.getElementById('signupForm');
-    
-    // Open the modal when "Sign Up" button is clicked
-    signUpBtn.addEventListener('click', function() {
-        modal.style.display = 'flex';
-    });
+describe('Signup Modal', () => {
+  it('should open the modal and close it when the close button is clicked', () => {
+    // Visit the page (adjust to your local test URL)
+    cy.visit('http://localhost:3000');
 
-    // Close the modal when the "X" button is clicked
-    closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
+    // Click on the 'Sign Up' button to open the modal
+    cy.get('#signUpBtn').click();
 
-    // Close the modal if the user clicks outside of it
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+    // Wait for the modal to appear and ensure it is visible
+    cy.get('#signupModal').should('be.visible');
 
-    // Handle form submission
-    submitBtn.addEventListener('submit', function(event) {
-        event.preventDefault();
+    // Wait for the close button inside the modal and ensure it is visible
+    cy.get('.close-btn').should('be.visible');
 
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
+    // Click the close button to close the modal
+    cy.get('.close-btn').click();
 
-        // Check if password and confirm password match
-        if (password !== confirmPassword) {
-            alert('Passwords do not match!');
-            return;
-        }
-
-        // Process form data here (you can send it to a backend or handle it further)
-        alert('Account created successfully!');
-
-        // Close the modal after form submission
-        modal.style.display = 'none';
-
-        // Reset the form fields
-        submitBtn.reset();
-    });
+    // Verify the modal is no longer visible after closing
+    cy.get('#signupModal').should('not.be.visible');
+  });
 });
