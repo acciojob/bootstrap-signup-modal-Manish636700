@@ -1,171 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Modal</title>
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Style for input fields */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: bold;
-            display: block;
-        }
-
-        input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .small-text {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: space-between;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Modal</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Button to trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">
+    Sign Up
+  </button>
 
-    <!-- Sign Up Button -->
-    <button id="signupBtn">Sign Up</button>
-
-    <!-- The Modal -->
-    <div id="signupModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Create Account</h2>
-            <form id="signupForm">
-                <!-- Email input -->
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" id="email" placeholder="Enter email" required>
-                    <small class="small-text">Your information is safe with us.</small>
-                </div>
-
-                <!-- Password input -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Password" required>
-                </div>
-
-                <!-- Confirm Password input -->
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit">Submit</button>
-            </form>
-            <div class="modal-footer">
-                <button class="close">Close</button>
-            </div>
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-
+        <div class="modal-body">
+          <!-- Signup Form -->
+          <form>
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">Your information is safe with us.</small>
+            </div>
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <!-- Confirm Password -->
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Get modal and buttons
-        var modal = document.getElementById("signupModal");
-        var btn = document.getElementById("signupBtn");
-        var closeBtns = document.getElementsByClassName("close");
-
-        // Show the modal when the sign-up button is clicked
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // Close the modal when the user clicks on the close button or outside the modal
-        for (var i = 0; i < closeBtns.length; i++) {
-            closeBtns[i].onclick = function() {
-                modal.style.display = "none";
-            }
-        }
-
-        // Close the modal if the user clicks outside of the modal content
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Handle form submission (You can implement the form submission logic here)
-        var signupForm = document.getElementById('signupForm');
-        signupForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Add form submission logic
-            alert("Form Submitted");
-            modal.style.display = "none";
-        });
-    </script>
-	 <script type="text/javascript" src="./script.js">
-</script>
-
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
