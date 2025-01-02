@@ -56,15 +56,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  document.querySelector('#saveChangesBtn').addEventListener('click', function() {
+ document.querySelector('#saveChangesBtn').addEventListener('click', function() {
   // Your existing code for saving changes (if any)
   alert('Changes have been saved!');
 
-  // Wait for the modal to hide using Cypress commands
-  cy.wait(() => !document.getElementById('exampleModal').classList.contains('show'));
+  // Get the modal instance using vanilla JavaScript
+  const myModal = document.getElementById('exampleModal');
+  const modalInstance = bootstrap.Modal.getInstance(myModal);
 
-  // Close the modal using Cypress command
-  cy.get('#exampleModal').invoke('hide');
+  // Hide the modal using the modal instance
+  modalInstance.hide();
 });
 </script>
 
