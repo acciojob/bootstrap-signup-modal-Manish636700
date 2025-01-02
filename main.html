@@ -57,14 +57,15 @@
 
 <script>
   document.querySelector('#saveChangesBtn').addEventListener('click', function() {
-    // Your existing code for saving changes (if any)
-    alert('Changes have been saved!');
+  // Your existing code for saving changes (if any)
+  alert('Changes have been saved!');
 
-    // Code to close the modal
-    var myModal = document.getElementById('exampleModal');
-    var bsModal = bootstrap.Modal.getInstance(myModal);
-    bsModal.hide();
-  });
+  // Wait for the modal to hide using Cypress commands
+  cy.wait(() => !document.getElementById('exampleModal').classList.contains('show'));
+
+  // Close the modal using Cypress command
+  cy.get('#exampleModal').invoke('hide');
+});
 </script>
 
 </body>
